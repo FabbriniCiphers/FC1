@@ -16,8 +16,8 @@
 # Under the following terms:
 #
 # ATTRIBUTION — You must give appropriate credit (mentioning that your work is derived 
-# from work by Michele Fabbrini), provide a link to the license, and indicate if 
-# changes were made.
+# from work by Michele Fabbrini https://fabbrini.org/), provide a link to the license, 
+# and indicate if changes were made.
 # You may do so in any reasonable manner, but not in any way that suggests the licensor
 # endorses you or your use.
 #
