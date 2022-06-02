@@ -29,10 +29,8 @@ secondarykey.txt.
 
 PRIMARY KEY GENERATION
 
-PKeyGenPrimeMod allows you to generate a primary key consisting of a prime number * 
-in a given range. Download the "Primes.jl" package in .zip format and place it in 
-Julia's "bin" folder: https://github.com/JuliaMath/Primes.jl.
+PKeyGenPrimeMod allows you to generate a primary key consisting of a prime number* in a given range. 
+Download the "Primes.jl" package in .zip format and place it in Julia's "bin" folder: https://github.com/JuliaMath/Primes.jl.
 
-
-* PKeyGenCompMod file will be available soon to generate primary keys consisting 
+*PKeyGenCompMod file will be available soon to generate primary keys consisting 
   of multiple factors.
