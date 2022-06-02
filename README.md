@@ -19,17 +19,15 @@ https://datatracker.ietf.org/doc/draft-fabbrini-algorithm-post-alien-cryptograph
 
 The Encryption and Decryption e was tested on a Windows OS. This is a beta version
 that is still under development and you might encounter some bugs. I would welcome
-general comments and feedback at fc1@fabbrini.org.
-
+general comments and feedback at fc1@fabbrini.org. 
 Download latest Julia stable release at https://julialang.org/downloads. In ’bin’
 folder create following .txt files: plaintext.txt, primarykey.txt,
 secondarykey.txt, ciphertext.txt, decryptedplaintext.txt. Input a binary string in
 plaintext.txt, a binary integer in primarykey.txt, a decimal integer in
 secondarykey.txt.
---------------------------
 
-# Primary Key Generation code
-Primary Key Generation
+
+PRIMARY KEY GENERATION
 
 PKeyGenPrimeMod allows you to generate a primary key consisting of a prime number * 
 in a given range. Download the "Primes.jl" package in .zip format and place it in 
