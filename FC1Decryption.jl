@@ -81,7 +81,7 @@ skeystring=open(f->read(f, String), "secondarykey.txt")
 
 #Checking plaintext
 function fplainvalid()
-	try
+    try
         parse(BigInt,plain,base=2)
     catch err
         if isa(err, ArgumentError)
@@ -89,21 +89,21 @@ function fplainvalid()
             sleep(10)
             exit()						 
         end
-	end
+    end
 end	
 fplainvalid()
 
 #Checking primarykey
 function fpkeyvalid1()
     try
-	    parse(BigInt,plain,base=2)
+        parse(BigInt,plain,base=2)
     catch err
         if isa(err, ArgumentError)
             println("Primarykey MUST be a binary string!")
             sleep(10)
             exit()						 
         end
-	end
+    end
 end
 fpkeyvalid1()
 
@@ -112,7 +112,7 @@ function fpkeyvalid2()
 	    println("Primarykey MUST NOT start with '0'!")
 		sleep(10)
         exit()		
-	end
+    end
 end
 fpkeyvalid2()
 
@@ -125,8 +125,8 @@ function fskeyvalid()
             println("Skey MUST be an integer!")
             sleep(10)
             exit()
-		end
 	end
+    end
 end							
 fskeyvalid()
 
@@ -150,19 +150,19 @@ function fdecrypt()
     # Case1
     if remclen >= pkeybinlen
         cblock=first(remc,pkeybinlen)
-		inputbin=lstrip(cblock,['0'])		 
+	inputbin=lstrip(cblock,['0'])		 
         input=parse(BigInt,inputbin,base=2)
         pkey=parse(BigInt,pkeybin,base=2)
          
         function finv(input,pkey)
-		    try
+	    try
                @time invmod(input,pkey)
-			catch err
+	    catch err
                 if isa(err, DomainError)
                     println("ATTENTION! CIPHERTEXT COULD BE CORRUPTED!")
                     sleep(10)
-					exit()
-			    end
+		    exit()
+	        end
             end
         end   	
         output=finv(input,pkey)        
@@ -170,27 +170,27 @@ function fdecrypt()
         tplain1=chop(outputbin, head = 1, tail = 1)        
 		global remclen=remclen-pkeybinlen        
         global remc=last(remc,remclen)        
-		global tplain=string(tplain,tplain1)
-	    fdecrypt()
+	global tplain=string(tplain,tplain1)
+	fdecrypt()
 
 
     # Case 2
     elseif remclen < pkeybinlen
-		global tplainlen=length(tplain)
-		global plainlen=tplainlen-256
-	    plaincheck=first(tplain,plainlen)
+	global tplainlen=length(tplain)
+	global plainlen=tplainlen-256
+	plaincheck=first(tplain,plainlen)
 		      				
 ########################
 # Data Integrity Check #
 ########################
 
-	    tagcheck=last(tplain,256) 
+	tagcheck=last(tplain,256) 
         taghex= bytes2hex(sha256(plaincheck))
         println("This is the 256-bit hash of Plaintext check (hex): ", taghex)
         tagdec=parse(BigInt,taghex,base=16)       
         tagbintemp=string(tagdec,base=2)
         tagbintemplen = length(tagbintemp)
-		global ikeylen=remclen
+	global ikeylen=remclen
 
         function ftagbitscheck()
             if tagbintemplen == 256
@@ -198,26 +198,25 @@ function fdecrypt()
             else
                 global tagbin = lpad(tagbintemp,256,"0")
             end          
-		end
-		ftagbitscheck()
+	end
+	ftagbitscheck()
 		 
-		function fintegritycheck()
-		    check=cmp(tagcheck::AbstractString, tagbin::AbstractString)
+	function fintegritycheck()
+	    check=cmp(tagcheck::AbstractString, tagbin::AbstractString)
                   if check==0
-				      function fwritetofile()
-		                  open("decryptedplaintext.txt", "w") do f
+                      function fwritetofile()
+		          open("decryptedplaintext.txt", "w") do f
                                write(f, plaincheck)
                           end
-	                  end
-					  fwritetofile()		  
+	              end
+		      fwritetofile()		  
                       println("Decrypted Plaintext has been generated.")
-		              println("SUCCESS!!!")
-		          else
+		      println("SUCCESS!!!")
+		  else
                       println("DATA INTEGRITY ALERT: CORRUPTED CIPHERTEXT!")
                   end 
-	   
          end
-		 fintegritycheck()
+	fintegritycheck()
     end
 end
 
